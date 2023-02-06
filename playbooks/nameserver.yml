@@ -1,0 +1,11 @@
+- name: Set nameserver records in /etc/resolv.conf
+  hosts: "debian"
+  become: true
+  tasks:
+  - name: Replace current resolv.conf file
+    template: src=../templates/etc-resolv.conf dest=/etc/resolv.conf
+  
+  - name: Restart Networking Service
+    ansible.builtin.systemd:
+      name: networking
+      state: reloaded
