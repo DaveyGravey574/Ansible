@@ -7,7 +7,6 @@ esxi-dave ansible_host=192.168.1.254 ansible_user=root
 [debian]
 pihole ansible_host=192.168.1.251 ansible_user=david
 pihole-bkup ansible_host=192.168.1.252 ansible_user=david
-ansible-control ansible_host=192.168.1.248 ansible_user=david
 bind9dns ansible_host=192.168.1.4 ansible_user=david
 eve-ng ansible_host=192.168.1.251 ansible_user=david
 thedock ansible_host=192.168.1.250 ansible_user=david
