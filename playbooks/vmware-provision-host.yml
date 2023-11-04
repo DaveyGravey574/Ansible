@@ -1,14 +1,14 @@
 ---
 - name: Create VMWare ESXi VM
-  hosts: all
+  hosts: debian
   gather_facts: false
   vars:
     destructive: false
   tasks:
-    - include_vars: config.yaml
+    - include_vars: config.yml
       delegate_to: localhost
 
-    - include_vars: creds.yaml # Remember, this should be in a vault
+    - include_vars: creds.yml # Remember, this should be in a vault
       delegate_to: localhost   # These creds are for example use only
 
     - name: Check if virtual machine exists
@@ -37,8 +37,8 @@
       add_host:
         hostname: "{{ vmware_host }}"
         ansible_ssh_host: "{{ vmware_host }}"
-        ansible_user: "{{ vmware_user }}"
-        ansible_ssh_pass: "{{ vmware_password }}"
+        ansible_user: "{{ ansible_user }}"
+        ansible_ssh_pass: "{{ ansible_ssh_private_key_file }}"
       when: destructive
 
     - set_fact:
