@@ -1,9 +1,0 @@
-- name: install vmware tools package debian
-  hosts: "debian"
-  tasks:
-    - name: install open-vm-tools
-      apt:  
-        name: open-vm-tools
-        state: present
-        update_cache: true
-      become: true
