@@ -1,3 +1,4 @@
+---
 - name: install vmware tools package debian
   hosts: "debian"
   tasks:

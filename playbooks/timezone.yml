@@ -1,3 +1,4 @@
+---
 - name: Set timezone and configure ntp
   hosts: "debian"
   become: true

@@ -1,3 +1,4 @@
+---
 - name: Set nameserver records in /etc/resolv.conf
   hosts: "debian"
   become: true
