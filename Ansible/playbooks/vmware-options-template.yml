@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   gather_facts: false
-  become: yes
+  become: true
   vars_files:
     - vars/creds.yml
     - vars/vcentervars.yml
@@ -13,7 +13,7 @@
     # change the below variables to the exact filename of the desired ESXi Version and build.
     # Long term use requires you to add the build directories from the extracted boot.cfg files from the original iso
     # and add them to the files/ directory. Please see README.md for more information, or inspect the files directory for examples.
-    - src_iso_file: "VMware-ESXi-6.7.0-9484548-HPE-Gen9plus-670.10.3.5.6-Sep2018.iso"
+    - src_iso_file: ""
     - esxi_build: "15160138"
     - encrypted_root_password: "" # <- Use openssl to create this. You can also vault the encrypted string for more protection.
   vars_prompt:
