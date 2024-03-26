@@ -1,3 +1,4 @@
+---
 - name: Stop and remove timesyncd
   hosts: "debian"
   become: true
