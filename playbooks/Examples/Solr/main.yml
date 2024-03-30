@@ -45,7 +45,7 @@
         -u solr
         -s solr
         -p 8983
-        creates={{ solr_dir }}/bin/solr
+        creates={{ solr_dir }}/bin/solr  # Add creates in-line here since you are adding an argument to the command.
     - name: Ensure solr is started and enabled at boot.
       service:
         name: solr
