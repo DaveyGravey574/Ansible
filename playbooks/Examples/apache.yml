@@ -1,0 +1,31 @@
+---
+- name: Install Apache.  # This playbook is an example not to be used
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install Apache
+      yum:
+        name:
+          - httpd
+          - httpd-devel
+        state: present
+
+    - name: Copy configuration files.
+      copy:
+        src: "{{ item.src }}"  # jinja variable that uses the values in with_items
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - src: httpd.conf
+          dest: /etc/httpd/conf/httpd.conf  # This config file does not exit
+        - src: httpd-vhosts.conf  # This config file does not exit
+          dest: /etc/httpd/conf/httpd-vhosts.conf
+
+    - name: Ensure Apache is started now and at boot.
+      service:
+        name: httpd
+        state: started
+        enabled: true

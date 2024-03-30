@@ -2,10 +2,10 @@
 - hosts: "debian"
   become: true
   tasks:
-    - name: apt update
+    - name: Use apt to update packages from remote repositories.
       apt:
         update_cache: yes
     
-    - name: apt upgrade
+    - name: Upgrade packages to the lastest version.
       apt:
         upgrade: yes
