@@ -1,0 +1,21 @@
+---
+all:
+  hosts:
+  children:
+    example:
+      hosts:
+        esxi-dave.prod.davidingwersen.com:
+          ip: 192.168.1.254 
+          ansible_host: 192.168.1.254
+          vmware:
+            ip_address: 192.168.1.1251
+            gateway_address: 192.168.1.1
+            dns_address: 192.168.1.4
+            netmask: 255.255.255.0
+            mac_address: "00:16:3E:A0:06:43"
+            memory_mb: 8192
+            name: Test
+            num_cpus: 2
+            port_group: Example-App
+            guest_id: Debian11Guest
+            disks: []
