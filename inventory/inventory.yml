@@ -17,8 +17,13 @@ all:
 
     debian:
       hosts:
-        tech-dns:
-        TheDock:
+        tech-dns.prod.davidingwersen.com:
+        # 192.168.1.4:
+        thedock.prod.davidingwersen.com:
+        # 192.168.1.252:
+        immich.prod.davidingwersen.com:
+        # 192.168.1.248:
+        raspian.jp.davidingwersen.com:
       vars:
         ansible_ssh_private_key_file: ~/.ssh/ansible
         ansible_user: david
