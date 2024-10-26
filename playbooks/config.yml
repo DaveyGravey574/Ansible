@@ -1,5 +1,0 @@
----
-- vmware_host: 192.168.1.254
-- image_name: Debian_Base_Image
-- datastore_name: datastore1
-- storage_path: /vmfs/volumes/658fe123-93e5d567-a18c-001018f0f000
