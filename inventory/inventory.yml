@@ -9,7 +9,7 @@ all:
         ansible_user: root
     hypervisors:
       hosts:
-        esxi-dave.prod.davidingwersen.com:
+        prox.prod.davidingwersen.com:
           ansible_host=192.168.1.254:
       vars:
         ansible_user: root
@@ -18,11 +18,8 @@ all:
     debian:
       hosts:
         tech-dns.prod.davidingwersen.com:
-        # 192.168.1.4:
         thedock.prod.davidingwersen.com:
-        # 192.168.1.252:
         immich.prod.davidingwersen.com:
-        # 192.168.1.248:
         raspian.jp.davidingwersen.com:
       vars:
         ansible_user: david
@@ -43,11 +40,8 @@ all:
     tailscale:
       hosts:
         tech-dns.prod.davidingwersen.com:
-        # 192.168.1.4:
         thedock.prod.davidingwersen.com:
-        # 192.168.1.252:
         immich.prod.davidingwersen.com:
-        # 192.168.1.248:
         raspian.jp.davidingwersen.com:
       vars:
         ansible_user: david
