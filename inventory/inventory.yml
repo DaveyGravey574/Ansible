@@ -27,7 +27,7 @@ all:
 
     freebsd:
       hosts:
-        opnsense:
+        opnsense.prod.davidingwersen.com:
           ansible_host=192.168.1.1:
           ansible_user=root:
 
