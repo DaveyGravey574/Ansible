@@ -1,0 +1,10 @@
+---
+- name: stop ntp
+  ansible.builtin.systemd:
+    name: ntp
+    state: stopped
+
+- name: restart ntp
+  ansible.builtin.systemd:
+    name: ntp
+    state: restarted

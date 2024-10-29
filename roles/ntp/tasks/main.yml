@@ -1,0 +1,79 @@
+---
+- name: Stop and remove timesyncd
+  become: true
+  block:
+    - name: Stop timesyncd
+      ansible.builtin.systemd:
+        name: systemd-timesyncd
+        state: stopped
+
+    - name: Disable timesyncd service and ensure it is masked
+      ansible.builtin.systemd:
+        name: systemd-timesyncd
+        enabled: false
+        masked: yes
+
+    - name: Set timezone based on location
+      timezone:
+        name: "{{ timezone }}"
+
+    - name: Update packages before configuring NTP
+      include_role:
+        name: update_packages
+
+    - name: Install and configure NTP
+      apt:
+        name: ntp
+        state: present
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Install and configure NTP on RedHat-based systems
+      yum:
+        name: ntp
+        state: present
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Check if /etc/ntpsec/ntp.conf exists on the remote host
+      stat:
+        path: /etc/ntpsec/ntp.conf
+      register: ntp_conf_remote
+
+    - name: Copy ntp.conf if the file does not exist on the remote host
+      copy:
+        src: ntp.conf
+        dest: /etc/ntpsec/ntp.conf
+      when: not ntp_conf_remote.stat.exists
+
+    - name: Get the content of the /etc/ntpsec/ntp.conf on the remote host
+      slurp:
+        src: /etc/ntpsec/ntp.conf
+      when: ntp_conf_remote.stat.exists
+      register: ntp_conf_remote_content
+
+    - name: Get the content of the /etc/ntpsec/ntp.conf on the control node
+      set_fact:
+        ntp_conf_local_content: "{{ lookup('file', 'ntp.conf') | b64encode }}"
+
+    - name: Compare local and remote ntp.conf files
+      debug:
+        msg: "Files match, skipping the rest of the role."
+      when:
+        - ntp_conf_remote.stat.exists
+        - ntp_conf_remote_content['content'] == ntp_conf_local_content
+      
+    - name: Copy over ntp configuration if files differ
+      copy:
+        src: ntp.conf
+        dest: /etc/ntpsec/ntp.conf
+      when:
+        - ntp_conf_remote.stat.exists
+        - ntp_conf_remote_content['content'] != ntp_conf_local_content
+      notify:
+        - stop ntp
+        - restart ntp
+
+    - name: Enable ntp service and ensure it is not masked.
+      ansible.builtin.systemd:
+        name: ntp
+        enabled: true
+        masked: no

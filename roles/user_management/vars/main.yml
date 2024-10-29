@@ -1,0 +1,15 @@
+---
+users:
+  - name: david
+    comment: "David's user account"
+    shell: /bin/bash
+    groups: sudo
+    password: "{{ user_passwords.david }}" 
+    ssh_key: "{{ lookup('file', '/Users/davidingwersen/.ssh/id_ed25519.pub') }}"
+
+  - name: ansible
+    comment: "Ansible automation user"
+    shell: /bin/bash
+    groups: []
+    password: "{{ user_passwords.ansible }}"
+    ssh_key: "{{ lookup('file', '/Users/davidingwersen/.ssh/id_ed25519.pub') }}"

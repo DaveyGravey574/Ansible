@@ -1,0 +1,19 @@
+---
+- name: Ensure users are created
+  user:
+    name: "{{ item.name }}"
+    comment: "{{ item.comment }}"
+    shell: "{{ item.shell }}"
+    createhome: yes
+    state: present
+    groups: "{{ item.groups | default(omit) }}"
+    password: "{{ item.password }}"
+  loop: "{{ users }}"
+
+- name: Set authorized keys for each user
+  authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ item.ssh_key }}"
+  loop: "{{ users }}"
+  when: item.ssh_key != ""
