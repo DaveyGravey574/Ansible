@@ -1,0 +1,5 @@
+timezone: "Asia/Tokyo"
+nameservers:  
+  - 192.168.0.251  
+  - 9.9.9.9
+domain: jp.davidingwersen.com

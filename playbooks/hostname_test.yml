@@ -1,0 +1,6 @@
+---
+- name: Configure dns on debian hosts
+  hosts: prod_davidingwersen_com:jp_davidingwersen_com
+  become: true
+  roles:
+    - set_dns

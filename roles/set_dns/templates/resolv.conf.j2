@@ -1,0 +1,6 @@
+# /etc/resolv.conf - Managed by Ansible
+{% for nameserver in nameservers %}
+nameserver {{ nameserver }}
+{% endfor %}
+domain {{ domain }}
+search prod.davidingwersen.com raspian.jp.davidingwersen.com
