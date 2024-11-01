@@ -8,12 +8,20 @@
         state: absent
       when: ansible_facts['os_family'] == "Debian"
 
-    - name: Remove the resolv.conf symlink (if it exists)
+    - name: Check if resolv.conf is a symlink
+      stat:
+        path: /etc/resolv.conf
+      register: resolv_conf_stat
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Remove the resolv.conf symlink if it exists
       file:
         path: /etc/resolv.conf
         state: absent
         force: yes
-      when: ansible_facts['os_family'] == "Debian"
+      when:
+        - ansible_facts['os_family'] == "Debian"
+        - resolv_conf_stat.stat.islnk is defined and resolv_conf_stat.stat.islnk
 
     - name: Remove networkmanager if present
       apt:

@@ -1,6 +1,6 @@
 ---
-- name: Configure DNS on Debian-based hosts
+- name: Configure sudoers file for ansible user
   hosts: prod_davidingwersen_com:jp_davidingwersen_com
   become: true
   roles:
-    - set_dns
+    - sudoers_configuration

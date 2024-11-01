@@ -1,6 +1,6 @@
 ---
 - name: Copy visudo configuration for 'ansible' user
-  template:
+  copy:
     src: ansible_sudoers
     dest: /etc/sudoers.d/ansible
     mode: '0440'

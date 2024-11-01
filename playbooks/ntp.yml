@@ -1,6 +1,0 @@
----
-- name: Configure ntp on debian hosts
-  hosts: "debian"
-  become: true
-  roles:
-    - ntp

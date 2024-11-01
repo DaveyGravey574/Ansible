@@ -1,0 +1,16 @@
+---
+docker_repo_url: "https://download.docker.com/linux/debian"
+docker_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - lsb-release
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-scan-plugin
+  - docker-compose-plugin
