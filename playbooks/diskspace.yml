@@ -1,6 +1,6 @@
 ---
 - name: Check disk space
-  hosts: "debian"
+  hosts: prod_davidingwersen_com:jp_davidingwersen_com
 
   tasks:
     - name: Check disk space available
