@@ -1,0 +1,6 @@
+---
+- name: Update packages on all systems
+  hosts: prod_davidingwersen_com:jp_davidingwersen_com
+  become: true
+  roles:
+    - update_packages

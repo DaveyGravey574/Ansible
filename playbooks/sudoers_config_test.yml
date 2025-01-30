@@ -3,4 +3,5 @@
   hosts: prod_davidingwersen_com:jp_davidingwersen_com
   become: true
   roles:
+    - user_management
     - sudoers_configuration

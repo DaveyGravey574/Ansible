@@ -14,5 +14,5 @@
       register: disk_usage
 
     - name: Print disk usage
-      debug:
+      ansible.builtin.debug:
         msg: "The disk usage on {{ inventory_hostname }} is {{ disk_usage.stdout }}"
