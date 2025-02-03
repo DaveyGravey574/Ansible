@@ -8,23 +8,23 @@
 - name: Upgrade all packages on Debian-based systems to their latest version
   ansible.builtin.apt:
     name: "*"
-    state: present
+    state: latest   # noqa: package-latest
   when: ansible_facts['os_family'] == "Debian"
 
 - name: Update packages on RedHat-based-based systems
   ansible.builtin.dnf:
     name: "*"
-    state: present
+    state: latest   # noqa: package-latest
     update_cache: true
   when: ansible_facts['os_family'] == "RedHat"
 
 - name: Update packages on Arch-based systems
-  pacman:
+  community.general.pacman:
     update_cache: true
     upgrade: true
   when: ansible_facts['os_family'] == "Archlinux"
 
 - name: Update packages on FreeBSD
-  pkgng:
+  community.general.pkgng:
     state: latest
   when: ansible_facts['os_family'] == "FreeBSD"
