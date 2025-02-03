@@ -1,6 +1,5 @@
 ---
 - name: Install Docker on Debian-based hosts
   hosts: prod_davidingwersen_com:jp_davidingwersen_com
-  become: true
   roles:
     - install_docker

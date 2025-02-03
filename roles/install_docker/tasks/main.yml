@@ -1,10 +1,9 @@
 ---
 
 - name: Install Docker on Debian-based systems
-  become: true
   block:
     - name: Check if Docker is already installed
-      ansible.builtin.shell: "docker --version"
+      ansible.builtin.command: "docker --version"
       register: docker_installed
       failed_when: docker_installed.rc == 0
       changed_when: false

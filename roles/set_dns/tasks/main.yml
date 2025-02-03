@@ -3,40 +3,40 @@
   become: true
   block:
     - name: Remove resolvconf if present
-      apt:
+      ansible.builtin.apt:
         name: resolvconf
         state: absent
       when: ansible_facts['os_family'] == "Debian"
 
     - name: Check if resolv.conf is a symlink
-      stat:
+      ansible.builtin.stat:
         path: /etc/resolv.conf
       register: resolv_conf_stat
       when: ansible_facts['os_family'] == "Debian"
 
     - name: Remove the resolv.conf symlink if it exists
-      file:
+      ansible.builtin.file:
         path: /etc/resolv.conf
         state: absent
-        force: yes
+        force: true
       when:
         - ansible_facts['os_family'] == "Debian"
         - resolv_conf_stat.stat.islnk is defined and resolv_conf_stat.stat.islnk
 
     - name: Remove networkmanager if present
-      apt:
+      ansible.builtin.apt:
         name: networkmanager
         state: absent
       when: ansible_facts['os_family'] == "Debian"
 
     - name: Remove systemd-resolved if present
-      apt:
+      ansible.builtin.apt:
         name: systemd-resolved
         state: absent
       when: ansible_facts['os_family'] == "Debian"
 
     - name: Copy resolv.conf from the control node to the target host
-      template:
+      ansible.builtin.template:
         src: resolv.conf.j2
         dest: /etc/resolv.conf
         owner: root

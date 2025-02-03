@@ -1,13 +1,13 @@
 ---
-docker_repo_url: "https://download.docker.com/linux/debian"
-docker_dependencies:
+install_docker_docker_repo_url: "https://download.docker.com/linux/debian"
+install_docker_docker_dependencies:
   - apt-transport-https
   - ca-certificates
   - curl
   - gnupg-agent
   - software-properties-common
   - lsb-release
-docker_packages:
+install_docker_docker_packages:
   - docker-ce
   - docker-ce-cli
   - containerd.io
