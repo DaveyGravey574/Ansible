@@ -1,30 +1,24 @@
 ---
 - name: Update packages on Debian-based systems
+  when: ansible_facts['os_family'] == "Debian"
   ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 3600
-  when: ansible_facts['os_family'] == "Debian"
 
 - name: Upgrade all packages on Debian-based systems to their latest version
+  when: ansible_facts['os_family'] == "Debian"
   ansible.builtin.apt:
     name: "*"
     state: latest   # noqa: package-latest
-  when: ansible_facts['os_family'] == "Debian"
 
 - name: Update packages on RedHat-based-based systems
+  when: ansible_facts['os_family'] == "RedHat"
   ansible.builtin.dnf:
     name: "*"
     state: latest   # noqa: package-latest
     update_cache: true
-  when: ansible_facts['os_family'] == "RedHat"
-
-- name: Update packages on Arch-based systems
-  community.general.pacman:
-    update_cache: true
-    upgrade: true
-  when: ansible_facts['os_family'] == "Archlinux"
 
 - name: Update packages on FreeBSD
+  when: ansible_facts['os_family'] == "FreeBSD"
   community.general.pkgng:
     state: latest
-  when: ansible_facts['os_family'] == "FreeBSD"

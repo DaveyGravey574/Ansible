@@ -1,0 +1,42 @@
+---
+- name: Gather and display facts for Cisco Network Devices
+  hosts: ios
+  become: true
+  gather_facts: false
+
+  tasks:
+
+    - name: Ensure IOS facts are gathered
+      cisco.ios.ios_facts:
+      register: ios_facts
+
+    - name: Ensure output is displayed
+      ansible.builtin.debug:
+        var: ios_facts
+
+    - name: Ensure specified commands are run
+      register: ios_output
+      cisco.ios.ios_command:
+        commands:
+          - show version
+          - show ip int bri
+
+    - name: Ensure output is displayed
+      ansible.builtin.debug:
+        var: ios_output
+
+    - name: Print serial number
+      ansible.builtin.debug:
+        msg: 
+          - "Serial: {{ ios_facts['ansible_facts']['ansible_net_serialnum'] }}"
+          - "Hostname: {{ ios_facts['ansible_facts']['ansible_net_hostname'] }}"
+
+    - name: Display configured VLANs
+      cisco.ios.ios_command:
+        commands: show vlans
+      register: vlan_result
+      failed_when: "'No virtual LANs configured' in vlan_result['stdout'][0]"
+
+    - name: Ensure output is displayed
+      ansible.builtin.debug:
+        var: vlan_result

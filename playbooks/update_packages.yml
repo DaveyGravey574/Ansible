@@ -1,6 +1,9 @@
 ---
 - name: Update packages on all systems
-  hosts: prod_davidingwersen_com:jp_davidingwersen_com:hypervisors
+  hosts:
+    - prod_davidingwersen_com
+    - jp_davidingwersen_com
+    - hypervisors
   become: true
   roles:
     - update_packages

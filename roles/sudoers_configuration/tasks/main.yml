@@ -1,8 +1,9 @@
 ---
 - name: Copy sudo configuration for 'ansible' user
+  become: true
+  become_user: root
+
   ansible.builtin.copy:
     src: ansible_sudoers
     dest: /etc/sudoers.d/ansible
     mode: '0440'
-  become: true
-  become_user: root

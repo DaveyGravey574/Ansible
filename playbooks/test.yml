@@ -1,0 +1,23 @@
+---
+- name: Gather and display facts for Cisco Network Devices
+  hosts: ios
+  become: true
+  gather_facts: false
+
+  tasks:
+
+    - name: Gather facts about ios managed nodes
+      cisco.ios.ios_facts:
+        gather_network_resources:
+          - ntp_global
+      register: ios_facts
+
+    - name: Display and manipulate running-config output
+      ansible.builtin.debug:
+        msg: "NTP server {{ item.server }}, VRF: {{ item.vrf }}"
+      loop: "{{ ios_facts['ansible_facts']['ansible_network_resources']['ntp_global']['servers'] }}"
+
+    - name: Display and manipulate running-config output
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop: "{{ ios_facts['ansible_facts']['ansible_network_resources']['ntp_global']['servers'] | map(attribute='server') | list }}"
